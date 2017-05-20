@@ -1,0 +1,96 @@
+<html>
+<head><title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <!-- Online -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+  <!-- Offline -->
+  <!-- <link rel="stylesheet" href="offline/bootstrap.min.css"> -->
+  <!-- <link rel="stylesheet" href="offline/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
+
+  <link href="css/reference.css" rel="stylesheet" type="text/css" />
+  <script src="js/xml2json.js"></script>
+  <script src="js/sources.js"></script>
+  <script src="js/configure.js"></script>
+
+</head>
+<body>
+
+
+<!-- //////////////////////////////////////////////////////// -->
+<!--                        MENU                              -->
+<!-- //////////////////////////////////////////////////////// -->
+
+
+<div class="toolbar container">
+  <div class="row title-row">
+    <div class="title col-md-12 logo">Reference Library&nbsp;&nbsp;&nbsp;<img src="img/d20.png" width="25" height="28"></div>
+  </div>
+  <div class="row menu-row">
+    <div class="button menu-button">&nbsp;<span class="glyphicon glyphicon-th"></span>&nbsp;</div>
+    <div class="button" id="cancel">Return &nbsp;<span class="glyphicon glyphicon-remove"></span></div>
+    <div class="button" id="show_key_button">&nbsp;<span class="glyphicon glyphicon-question-sign"></span>&nbsp;</div>
+  </div>
+</div>
+
+<div id="index-menu" class="index-menu">
+  <div class="index-row">
+    <div id="menu-auto-roll-tables" class='index-btn' aria-hidden='true'>Auto Roll Tables</div>
+  </div>
+  <div class="index-row">
+    <div id="menu-region-map-generator" class='index-btn' aria-hidden='true'>Region Map Generator</div>
+  </div>
+  <div class="index-row">
+    <div id="menu-region-map-generator" class='index-btn' aria-hidden='true'>Reference Library</div>
+  </div>
+</div>
+
+<div class="key" id="key">
+  <center>
+  <table class="key_table">
+    <tr>
+      <td>
+        <p><i>How this tool works:</i> This tool uses various-sourced data files to populate a Reference Libary on your machine.  No source data tables are stored within the tool, only links to external sources are provided to allow you to import into your local reference libary.</p>
+      </td>
+    </tr>
+
+  </table>
+  </center>
+</div>
+
+
+<!-- //////////////////////////////////////////////////////// -->
+<!--                        BODY                              -->
+<!-- //////////////////////////////////////////////////////// -->
+
+
+<!-- <canvas id="canvas" width="1000" height="1000"></canvas> -->
+
+<div class="container">
+  <div class="row">
+    <div id="left-header" class="col-md-4">Available Sources<br><span class="subtext">Click to add Locally</span></div>
+    <div id="right-header" class="col-md-8">Local Sources</div>
+  </div>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div id="left" class="col-md-4">Loading Remote Sources...</div>
+    <div id="right" class="col-md-8">Loading Local Sources...</div>
+  </div>
+</div>
+
+
+<!-- //////////////////////////////////////////////////////// -->
+<!--                    EXTERNAL SOURCES                      -->
+<!-- //////////////////////////////////////////////////////// -->
+
+<div id="no_show" class="no_show">
+</div> <!-- Used to house dynamic content loaded from other locations -->
+
+</body>
+</html>
