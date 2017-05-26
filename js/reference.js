@@ -10,6 +10,7 @@ var load_right = true;
 var local_array = [];
 var new_source_array = [];
 var source_item = struct("friendly_name local_name url file");
+var loaded_sources = 0;
 // var item = new source_item(friendly_name, url);	// usage of source_item
 
 /********************************************************/
@@ -28,38 +29,36 @@ function add_to_array(source_item) {
     }
     if (replaced) break;
   }
-  // add new item
-	// log("adding new item");
   new_source_array.push(source_item);
 }
 
-function add_to_local_array(source_item) {
-  // iterate array to identify if it exists
-  var i;
-  var replaced=false;
-  for (var i=0; i<local_array.length; i++){
-    if(local_array[i]==source_item){
-      local_array.splice(i,1);
-      replaced=true;
-    }
-    if (replaced) break;
-  }
-  // add new item
-  local_array.push(source_item);
-}
-
-function remove_from_local_array(source_item) {
-  // iterate array to identify if it exists
-  var i;
-  var replaced=false;
-  for (var i=0; i<local_array.length; i++){
-    if(local_array[i]==source_item){
-      local_array.splice(i,1);
-      replaced=true;
-    }
-    if (replaced) break;
-  }
-}
+// function add_to_local_array(source_item) {
+//   // iterate array to identify if it exists
+//   var i;
+//   var replaced=false;
+//   for (var i=0; i<local_array.length; i++){
+//     if(local_array[i]==source_item){
+//       local_array.splice(i,1);
+//       replaced=true;
+//     }
+//     if (replaced) break;
+//   }
+//   // add new item
+//   local_array.push(source_item);
+// }
+//
+// function remove_from_local_array(source_item) {
+//   // iterate array to identify if it exists
+//   var i;
+//   var replaced=false;
+//   for (var i=0; i<local_array.length; i++){
+//     if(local_array[i]==source_item){
+//       local_array.splice(i,1);
+//       replaced=true;
+//     }
+//     if (replaced) break;
+//   }
+// }
 
 
 function clear_right() {
@@ -72,7 +71,7 @@ function clear_left() {
 
 function load_sources() {
 
-	// iterate sources
+	log("Loading "+sources.length+" sources...");
 	for (var i=0; i<sources.length; i++) {
 		// load source locally into iframe
 		load_source(sources[i]);
@@ -82,6 +81,8 @@ function load_sources() {
 
 function load_source(url) {
 	// LOAD INTO IFRAME, RETURN NAME OF IFRAME
+
+  log("Loading: "+url);
 
 	$.ajax({
 	    url: url,
@@ -96,6 +97,7 @@ function load_source(url) {
 				var i = new source_item(friendly_name, local_name, url, xml);
 				add_to_array(i);
 				add_new_source(i.friendly_name);
+        loaded_sources++;
 	    },
 	    error: function(e) {
 				console.log('Error querying source: ', e);
@@ -122,62 +124,67 @@ function add_new_source(friendly_name) {
 	}
 }
 
-function add_all_sources() {
-	for (var z=0; z<new_source_array.length; z++) {
-		add_to_local_array(new_source_array[z]);
-	}
+// function add_all_sources() {
+// 	for (var z=0; z<new_source_array.length; z++) {
+// 		add_to_local_array(new_source_array[z]);
+// 	}
+//
+// 	// store
+// 	// localStorage.setItem("new_source_array", new_source_array);
+// 	// localStorage.setItem("local_array", local_array);
+//
+// }
 
-	// store
-	localStorage.setItem("new_source_array", new_source_array);
-	localStorage.setItem("local_array", local_array);
-
-	refresh_right_view();
-}
-
-function add_source(object) {
-	var done = false;
-
-	// add to array
-	for (var z=0; z<new_source_array.length; z++) {
-		log("["+object.id+"|"+new_source_array[z].friendly_name+"]");
-		if(new_source_array[z].friendly_name==object.id) {
-			add_to_local_array(new_source_array[z]);
-			done = true;
-    }
-    if (done) break;
-	}
-
-	// store
-	localStorage.setItem("new_source_array", new_source_array);
-	localStorage.setItem("local_array", local_array);
-
-	refresh_right_view();
-
-}
+// function add_source(object) {
+// 	var done = false;
+//
+// 	// add to array
+// 	for (var z=0; z<new_source_array.length; z++) {
+// 		log("["+object.id+"|"+new_source_array[z].friendly_name+"]");
+// 		if(new_source_array[z].friendly_name==object.id) {
+// 			add_to_local_array(new_source_array[z]);
+// 			done = true;
+//     }
+//     if (done) break;
+// 	}
+//
+// 	// store
+// 	// localStorage.setItem("new_source_array", new_source_array);
+// 	// localStorage.setItem("local_array", local_array);
+//
+// }
 
 
-function remove_source(object) {
-	var done = false;
-
-	// add to array
-	for (var z=0; z<new_source_array.length; z++) {
-		log("["+object.id+"|"+new_source_array[z].friendly_name+"]");
-		if(new_source_array[z].friendly_name==object.id) {
-			remove_from_local_array(new_source_array[z]);
-			done = true;
-    }
-    if (done) break;
-	}
-
-	// store
-	localStorage.setItem("new_source_array", new_source_array);
-	localStorage.setItem("local_array", local_array);
-
-	refresh_right_view();
-}
+// function remove_source(object) {
+// 	var done = false;
+//
+// 	// add to array
+// 	for (var z=0; z<new_source_array.length; z++) {
+// 		log("["+object.id+"|"+new_source_array[z].friendly_name+"]");
+// 		if(new_source_array[z].friendly_name==object.id) {
+// 			remove_from_local_array(new_source_array[z]);
+// 			done = true;
+//     }
+//     if (done) break;
+// 	}
+//
+// 	// store
+// 	// localStorage.setItem("new_source_array", new_source_array);
+// 	// localStorage.setItem("local_array", local_array);
+//
+// 	refresh_right_view();
+// }
 
 function refresh_left_view() {
 	// iterate sources > Items
+
+  console.log("new_source_array:"+new_source_array.length);
+
+
+
+
+
+
 }
 
 function refresh_right_view() {
@@ -275,6 +282,16 @@ $(function() {
 
 	process_sources();
 	load_sources();
-	refresh_left_view();
+
+  // check every 1/4 second for sources to be loaded, when loaded, refresh left and right views
+  var timerId = setInterval(function() {
+    log("sources: ["+loaded_sources+"]|"+sources.length+"]");
+    if (loaded_sources == sources.length) {
+      loaded_sources = 0;
+      clearInterval(timerId);
+      refresh_left_view();
+      refresh_right_view();
+    }
+  }, 1000);
 
 });
